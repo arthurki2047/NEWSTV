@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import channelData from "@/lib/channels.json";
 import { cn } from "@/lib/utils";
-import { Tv, Radio, Search, ChevronRight, ChevronLeft, Globe, Briefcase, LayoutGrid } from "lucide-react";
+import { Tv, ChevronRight, ChevronLeft, LayoutGrid } from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function Home() {
           setActiveChannelIndex(0);
           break;
         case "Enter":
-        case "SoftCenter": // KaiOS specific
+        case "SoftCenter":
           if (filteredChannels[activeChannelIndex]) {
             router.push(`/watch/${filteredChannels[activeChannelIndex].id}`);
           }
@@ -55,7 +55,6 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeChannelIndex, activeCategoryIndex, filteredChannels, categories.length, router]);
 
-  // Handle scrolling of active element into view
   useEffect(() => {
     const activeElement = document.getElementById(`channel-${activeChannelIndex}`);
     if (activeElement) {
@@ -80,7 +79,7 @@ export default function Home() {
       <div className="bg-secondary flex items-center justify-between px-1 py-1 overflow-hidden border-b">
         <ChevronLeft className="w-3 h-3 text-primary shrink-0 opacity-50" />
         <div className="flex-1 flex justify-center">
-          <span className="text-[11px] font-bold text-primary uppercase tracking-wider">
+          <span className="text-[10px] font-bold text-primary uppercase tracking-wider truncate">
             {currentCategory}
           </span>
         </div>
@@ -104,7 +103,7 @@ export default function Home() {
                 : "bg-white text-foreground shadow-sm hover:bg-gray-50"
             )}
           >
-            <div className="relative w-10 h-10 shrink-0 bg-gray-100 rounded-sm overflow-hidden border">
+            <div className="relative w-8 h-8 shrink-0 bg-gray-100 rounded-sm overflow-hidden border">
               <Image
                 src={channel.logo}
                 alt={channel.name}
@@ -118,14 +117,14 @@ export default function Home() {
                 {channel.name}
               </div>
               <div className={cn(
-                "text-[10px] truncate",
+                "text-[9px] truncate",
                 idx === activeChannelIndex ? "text-primary-foreground/80" : "text-muted-foreground"
               )}>
                 {channel.category}
               </div>
             </div>
             {idx === activeChannelIndex && (
-              <div className="w-2 h-2 bg-accent rounded-full animate-ping" />
+              <div className="w-1.5 h-1.5 bg-accent rounded-full animate-ping" />
             )}
           </div>
         ))}
@@ -139,7 +138,7 @@ export default function Home() {
       </div>
 
       {/* Footer / Hint */}
-      <div className="bg-gray-100 border-t px-2 py-0.5 flex justify-between text-[9px] font-medium text-gray-500">
+      <div className="bg-gray-100 border-t px-2 py-0.5 flex justify-between text-[8px] font-medium text-gray-500">
         <span>LEFT/RIGHT: Categories</span>
         <span className="font-bold text-primary">OK: Play</span>
       </div>

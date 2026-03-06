@@ -6,43 +6,85 @@
       "name": "Republic Bangla",
       "logo": "https://picsum.photos/seed/republicbangla/64/64",
       "youtube_id": "6BFc8Ak6ll8",
-      "category": "News"
+      "category": "Bengali News"
     },
     {
       "id": "abp-ananda",
       "name": "ABP Ananda",
       "logo": "https://picsum.photos/seed/abpananda/64/64",
       "youtube_id": "PKwLsAu-z10",
-      "category": "News"
+      "category": "Bengali News"
     },
     {
       "id": "tv9-bangla",
       "name": "TV9 Bangla",
       "logo": "https://picsum.photos/seed/tv9bangla/64/64",
       "youtube_id": "4P_P5KAn7AU",
-      "category": "News"
+      "category": "Bengali News"
     },
     {
       "id": "zee-24-ghanta",
       "name": "Zee 24 Ghanta",
       "logo": "https://picsum.photos/seed/zee24ghanta/64/64",
       "youtube_id": "vbsu2puWDz8",
-      "category": "News"
+      "category": "Bengali News"
     },
     {
       "id": "news18-bangla",
       "name": "News 18 Bangla",
       "logo": "https://picsum.photos/seed/news18bangla/64/64",
       "youtube_id": "6Ec7bnQVO44",
-      "category": "News"
+      "category": "Bengali News"
     },
     {
       "id": "cn-news",
       "name": "CN News",
       "logo": "https://picsum.photos/seed/cnnews/64/64",
       "youtube_id": "xDKphR5F1ro",
-      "category": "News"
+      "category": "Bengali News"
+    },
+    {
+      "id": "aaj-tak",
+      "name": "Aaj Tak",
+      "logo": "https://picsum.photos/seed/aajtak/64/64",
+      "youtube_id": "_6N_Szh0p6o",
+      "category": "Hindi News"
+    },
+    {
+      "id": "republic-bharat",
+      "name": "Republic Bharat",
+      "logo": "https://picsum.photos/seed/republicbharat/64/64",
+      "youtube_id": "zY2m0y5oUis",
+      "category": "Hindi News"
+    },
+    {
+      "id": "ndtv-india",
+      "name": "NDTV India",
+      "logo": "https://picsum.photos/seed/ndtvindia/64/64",
+      "youtube_id": "WB-y7_ymP9w",
+      "category": "Hindi News"
+    },
+    {
+      "id": "ndtv-24x7",
+      "name": "NDTV 24x7",
+      "logo": "https://picsum.photos/seed/ndtv247/64/64",
+      "youtube_id": "WB-y7_ymP9w",
+      "category": "English News"
+    },
+    {
+      "id": "republic-world",
+      "name": "Republic World",
+      "logo": "https://picsum.photos/seed/republicworld/64/64",
+      "youtube_id": "3f0m6K_S9qI",
+      "category": "English News"
+    },
+    {
+      "id": "india-today",
+      "name": "India Today",
+      "logo": "https://picsum.photos/seed/indiatoday/64/64",
+      "youtube_id": "M_W3S3nB3n8",
+      "category": "English News"
     }
   ],
-  "categories": ["All", "News"]
+  "categories": ["All", "Bengali News", "Hindi News", "English News"]
 }
