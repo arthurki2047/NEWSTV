@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import channelData from "@/lib/channels.json";
-import { ArrowLeft, Maximize, Volume2, Info } from "lucide-react";
+import { ArrowLeft, Maximize, Info } from "lucide-react";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -46,12 +46,18 @@ export default function PlayerPage() {
     );
   }
 
+  // Adding mute=1 is essential for browser autoplay policies
+  const playerUrl = `https://www.youtube.com/embed/${channel.youtube_id}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
+
   return (
     <div className="kaios-viewport flex flex-col bg-black overflow-hidden relative">
       {/* Player Header - Only show when not fullscreen */}
       {!isFullscreen && (
         <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent p-2 flex items-center gap-2">
-          <ArrowLeft className="w-4 h-4 text-white" />
+          <ArrowLeft 
+            className="w-4 h-4 text-white cursor-pointer" 
+            onClick={() => router.push("/")}
+          />
           <div className="flex-1 min-w-0">
             <h2 className="text-[10px] text-white font-bold truncate">
               {channel.name}
@@ -63,14 +69,11 @@ export default function PlayerPage() {
       {/* Video Container */}
       <div className={`relative flex-1 bg-black flex items-center justify-center ${isFullscreen ? 'z-50' : ''}`}>
         <iframe
-          src={`https://www.youtube.com/embed/${channel.youtube_id}?autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3`}
-          className="absolute inset-0 w-full h-full border-none pointer-events-none"
-          allow="autoplay; encrypted-media"
+          src={playerUrl}
+          className="absolute inset-0 w-full h-full border-none"
+          allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
         />
-        
-        {/* Overlay to catch focus/hints */}
-        <div className="absolute inset-0 z-10 pointer-events-none" />
       </div>
 
       {/* Control Bar - Only show when not fullscreen */}
@@ -95,7 +98,7 @@ export default function PlayerPage() {
 
       {/* Toast-style indicator for Fullscreen */}
       {isFullscreen && (
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[8px] px-2 py-0.5 rounded-full z-[60] animate-out fade-out fill-mode-forwards duration-1000 delay-[2000ms]">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[8px] px-2 py-0.5 rounded-full z-[60]">
           Press OK to exit Fullscreen
         </div>
       )}
