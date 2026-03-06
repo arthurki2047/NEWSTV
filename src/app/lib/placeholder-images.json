@@ -50,6 +50,12 @@
       "imageHint": "republic logo"
     },
     {
+      "id": "news-logo-india-tv",
+      "description": "India TV Logo",
+      "imageUrl": "https://picsum.photos/seed/indiatv/64/64",
+      "imageHint": "india tv"
+    },
+    {
       "id": "news-logo-ndtv",
       "description": "NDTV Logo",
       "imageUrl": "https://picsum.photos/seed/ndtv/64/64",

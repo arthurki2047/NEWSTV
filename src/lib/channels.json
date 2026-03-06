@@ -54,7 +54,14 @@
       "id": "republic-bharat",
       "name": "Republic Bharat",
       "logo": "https://picsum.photos/seed/republicbharat/64/64",
-      "youtube_id": "zY2m0y5oUis",
+      "youtube_id": "BDyKqpqsT2c",
+      "category": "Hindi News"
+    },
+    {
+      "id": "india-tv",
+      "name": "India TV",
+      "logo": "https://picsum.photos/seed/indiatv/64/64",
+      "youtube_id": "e1FIApIafWE",
       "category": "Hindi News"
     },
     {
