@@ -30,6 +30,12 @@
       "description": "Sports Live Logo",
       "imageUrl": "https://picsum.photos/seed/sports/64/64",
       "imageHint": "sports logo"
+    },
+    {
+      "id": "news-logo-republic-bangla",
+      "description": "Republic Bangla Logo",
+      "imageUrl": "https://picsum.photos/seed/republicbangla/64/64",
+      "imageHint": "republic logo"
     }
   ]
 }

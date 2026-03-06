@@ -16,6 +16,13 @@
       "category": "News"
     },
     {
+      "id": "republic-bangla",
+      "name": "Republic Bangla",
+      "logo": "https://picsum.photos/seed/republicbangla/64/64",
+      "youtube_id": "6BFc8Ak6ll8",
+      "category": "News"
+    },
+    {
       "id": "al-jazeera",
       "name": "Al Jazeera",
       "logo": "https://picsum.photos/seed/alj/64/64",
