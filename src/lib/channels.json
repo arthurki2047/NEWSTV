@@ -73,23 +73,23 @@
     },
     {
       "id": "ndtv-24x7",
-      "name": "NDTV 24x7",
+      "name": "NDTV 24*7",
       "logo": "https://picsum.photos/seed/ndtv247/64/64",
-      "youtube_id": "WB-y7_ymP9w",
+      "youtube_id": "CkvRppu0NeA",
       "category": "English News"
     },
     {
       "id": "republic-world",
       "name": "Republic World",
       "logo": "https://picsum.photos/seed/republicworld/64/64",
-      "youtube_id": "3f0m6K_S9qI",
+      "youtube_id": "EKZ9o6kApH0",
       "category": "English News"
     },
     {
       "id": "india-today",
       "name": "India Today",
       "logo": "https://picsum.photos/seed/indiatoday/64/64",
-      "youtube_id": "M_W3S3nB3n8",
+      "youtube_id": "Uun8mxFUXrU",
       "category": "English News"
     }
   ],
