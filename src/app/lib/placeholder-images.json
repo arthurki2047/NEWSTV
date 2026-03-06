@@ -1,0 +1,35 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "news-logo-1",
+      "description": "Global News Network Logo",
+      "imageUrl": "https://picsum.photos/seed/news1/64/64",
+      "imageHint": "news logo"
+    },
+    {
+      "id": "news-logo-2",
+      "description": "Tech TV Logo",
+      "imageUrl": "https://picsum.photos/seed/tech/64/64",
+      "imageHint": "tech logo"
+    },
+    {
+      "id": "news-logo-3",
+      "description": "Nature Live Logo",
+      "imageUrl": "https://picsum.photos/seed/nature/64/64",
+      "imageHint": "nature logo"
+    },
+    {
+      "id": "news-logo-4",
+      "description": "City Cam Logo",
+      "imageUrl": "https://picsum.photos/seed/city/64/64",
+      "imageHint": "city logo"
+    },
+    {
+      "id": "news-logo-5",
+      "description": "Sports Live Logo",
+      "imageUrl": "https://picsum.photos/seed/sports/64/64",
+      "imageHint": "sports logo"
+    }
+  ]
+}

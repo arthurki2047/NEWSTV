@@ -1,0 +1,48 @@
+
+{
+  "channels": [
+    {
+      "id": "sky-news",
+      "name": "Sky News Live",
+      "logo": "https://picsum.photos/seed/sky/64/64",
+      "youtube_id": "9AuqUPGDZxc",
+      "category": "News"
+    },
+    {
+      "id": "abc-news",
+      "name": "ABC News (US)",
+      "logo": "https://picsum.photos/seed/abc/64/64",
+      "youtube_id": "w_Ma8oQLmSM",
+      "category": "News"
+    },
+    {
+      "id": "al-jazeera",
+      "name": "Al Jazeera",
+      "logo": "https://picsum.photos/seed/alj/64/64",
+      "youtube_id": "gCNeDWCI0vo",
+      "category": "Global"
+    },
+    {
+      "id": "france24",
+      "name": "France 24",
+      "logo": "https://picsum.photos/seed/f24/64/64",
+      "youtube_id": "h3MuIUNCCzI",
+      "category": "Global"
+    },
+    {
+      "id": "bloomberg",
+      "name": "Bloomberg",
+      "logo": "https://picsum.photos/seed/bloom/64/64",
+      "youtube_id": "dp8PhLsUcFE",
+      "category": "Business"
+    },
+    {
+      "id": "dw-news",
+      "name": "DW News",
+      "logo": "https://picsum.photos/seed/dw/64/64",
+      "youtube_id": "vSInN6XpS_U",
+      "category": "Global"
+    }
+  ],
+  "categories": ["All", "News", "Global", "Business"]
+}
