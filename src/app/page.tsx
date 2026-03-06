@@ -12,7 +12,6 @@ export default function Home() {
   const router = useRouter();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [activeChannelIndex, setActiveChannelIndex] = useState(0);
-  const [viewState, setViewState] = useState<"categories" | "channels">("channels");
   const listRef = useRef<HTMLDivElement>(null);
 
   const categories = channelData.categories;
@@ -97,11 +96,12 @@ export default function Home() {
           <div
             key={channel.id}
             id={`channel-${idx}`}
+            onClick={() => router.push(`/watch/${channel.id}`)}
             className={cn(
-              "flex items-center gap-2 p-2 rounded border border-transparent transition-all duration-150",
+              "flex items-center gap-2 p-2 rounded border border-transparent transition-all duration-150 cursor-pointer",
               idx === activeChannelIndex 
                 ? "bg-primary text-white shadow-md scale-[1.02] translate-x-1" 
-                : "bg-white text-foreground shadow-sm"
+                : "bg-white text-foreground shadow-sm hover:bg-gray-50"
             )}
           >
             <div className="relative w-10 h-10 shrink-0 bg-gray-100 rounded-sm overflow-hidden border">
