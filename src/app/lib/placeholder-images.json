@@ -2,40 +2,40 @@
 {
   "placeholderImages": [
     {
-      "id": "news-logo-1",
-      "description": "Global News Network Logo",
-      "imageUrl": "https://picsum.photos/seed/news1/64/64",
-      "imageHint": "news logo"
-    },
-    {
-      "id": "news-logo-2",
-      "description": "Tech TV Logo",
-      "imageUrl": "https://picsum.photos/seed/tech/64/64",
-      "imageHint": "tech logo"
-    },
-    {
-      "id": "news-logo-3",
-      "description": "Nature Live Logo",
-      "imageUrl": "https://picsum.photos/seed/nature/64/64",
-      "imageHint": "nature logo"
-    },
-    {
-      "id": "news-logo-4",
-      "description": "City Cam Logo",
-      "imageUrl": "https://picsum.photos/seed/city/64/64",
-      "imageHint": "city logo"
-    },
-    {
-      "id": "news-logo-5",
-      "description": "Sports Live Logo",
-      "imageUrl": "https://picsum.photos/seed/sports/64/64",
-      "imageHint": "sports logo"
-    },
-    {
       "id": "news-logo-republic-bangla",
       "description": "Republic Bangla Logo",
       "imageUrl": "https://picsum.photos/seed/republicbangla/64/64",
       "imageHint": "republic logo"
+    },
+    {
+      "id": "news-logo-abp-ananda",
+      "description": "ABP Ananda Logo",
+      "imageUrl": "https://picsum.photos/seed/abpananda/64/64",
+      "imageHint": "abp logo"
+    },
+    {
+      "id": "news-logo-tv9-bangla",
+      "description": "TV9 Bangla Logo",
+      "imageUrl": "https://picsum.photos/seed/tv9bangla/64/64",
+      "imageHint": "tv9 logo"
+    },
+    {
+      "id": "news-logo-zee-24-ghanta",
+      "description": "Zee 24 Ghanta Logo",
+      "imageUrl": "https://picsum.photos/seed/zee24ghanta/64/64",
+      "imageHint": "zee logo"
+    },
+    {
+      "id": "news-logo-news18-bangla",
+      "description": "News 18 Bangla Logo",
+      "imageUrl": "https://picsum.photos/seed/news18bangla/64/64",
+      "imageHint": "news18 logo"
+    },
+    {
+      "id": "news-logo-cn-news",
+      "description": "CN News Logo",
+      "imageUrl": "https://picsum.photos/seed/cnnews/64/64",
+      "imageHint": "cn logo"
     }
   ]
 }

@@ -7,6 +7,41 @@
       "logo": "https://picsum.photos/seed/republicbangla/64/64",
       "youtube_id": "6BFc8Ak6ll8",
       "category": "News"
+    },
+    {
+      "id": "abp-ananda",
+      "name": "ABP Ananda",
+      "logo": "https://picsum.photos/seed/abpananda/64/64",
+      "youtube_id": "PKwLsAu-z10",
+      "category": "News"
+    },
+    {
+      "id": "tv9-bangla",
+      "name": "TV9 Bangla",
+      "logo": "https://picsum.photos/seed/tv9bangla/64/64",
+      "youtube_id": "4P_P5KAn7AU",
+      "category": "News"
+    },
+    {
+      "id": "zee-24-ghanta",
+      "name": "Zee 24 Ghanta",
+      "logo": "https://picsum.photos/seed/zee24ghanta/64/64",
+      "youtube_id": "vbsu2puWDz8",
+      "category": "News"
+    },
+    {
+      "id": "news18-bangla",
+      "name": "News 18 Bangla",
+      "logo": "https://picsum.photos/seed/news18bangla/64/64",
+      "youtube_id": "6Ec7bnQVO44",
+      "category": "News"
+    },
+    {
+      "id": "cn-news",
+      "name": "CN News",
+      "logo": "https://picsum.photos/seed/cnnews/64/64",
+      "youtube_id": "xDKphR5F1ro",
+      "category": "News"
     }
   ],
   "categories": ["All", "News"]
