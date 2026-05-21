@@ -1,10 +1,10 @@
-
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import channelData from "@/lib/channels.json";
 import { ArrowLeft, Maximize, Info } from "lucide-react";
+import Hls from "hls.js";
 
 export default function PlayerPage() {
   const router = useRouter();
@@ -12,6 +12,7 @@ export default function PlayerPage() {
   const channelId = params.id as string;
   const channel = channelData.channels.find((c) => c.id === channelId);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -28,6 +29,28 @@ export default function PlayerPage() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [router, isFullscreen]);
+
+  useEffect(() => {
+    if (channel?.stream_url && videoRef.current) {
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          enableWorker: true,
+          lowLatencyMode: true,
+        });
+        hls.loadSource(channel.stream_url);
+        hls.attachMedia(videoRef.current);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          videoRef.current?.play().catch(() => {
+            console.log("Autoplay prevented, user interaction required");
+          });
+        });
+        return () => hls.destroy();
+      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+        videoRef.current.src = channel.stream_url;
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  }, [channel]);
 
   if (!channel) {
     return (
@@ -46,8 +69,8 @@ export default function PlayerPage() {
     );
   }
 
-  // Adding mute=1 is essential for browser autoplay policies
-  const playerUrl = `https://www.youtube.com/embed/${channel.youtube_id}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
+  const isHls = !!channel.stream_url;
+  const playerUrl = isHls ? "" : `https://www.youtube.com/embed/${channel.youtube_id}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
 
   return (
     <div className="kaios-viewport flex flex-col bg-black overflow-hidden relative">
@@ -68,12 +91,23 @@ export default function PlayerPage() {
 
       {/* Video Container */}
       <div className={`relative flex-1 bg-black flex items-center justify-center ${isFullscreen ? 'z-50' : ''}`}>
-        <iframe
-          src={playerUrl}
-          className="absolute inset-0 w-full h-full border-none"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-        />
+        {isHls ? (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-contain"
+            controls
+            playsInline
+            autoPlay
+            muted
+          />
+        ) : (
+          <iframe
+            src={playerUrl}
+            className="absolute inset-0 w-full h-full border-none"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        )}
       </div>
 
       {/* Control Bar - Only show when not fullscreen */}

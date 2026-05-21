@@ -1,11 +1,10 @@
-
 {
   "channels": [
     {
       "id": "republic-bangla",
       "name": "Republic Bangla",
       "logo": "https://picsum.photos/seed/republicbangla/64/64",
-      "youtube_id": "6BFc8Ak6ll8",
+      "stream_url": "https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-366023/main.m3u8?ads.partner=republicweb",
       "category": "Bengali News"
     },
     {
