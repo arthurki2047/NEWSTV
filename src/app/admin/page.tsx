@@ -153,8 +153,12 @@ export default function AdminPanel() {
           {channels?.map((channel) => (
             <Card key={channel.__id} className="relative overflow-hidden group">
               <CardContent className="p-4 flex items-center gap-3">
-                <div className="w-12 h-12 bg-gray-100 rounded border overflow-hidden shrink-0">
-                  <img src={channel.logo} alt="" className="w-full h-full object-cover" />
+                <div className="w-12 h-12 bg-gray-100 rounded border overflow-hidden shrink-0 flex items-center justify-center">
+                  {channel.logo ? (
+                    <img src={channel.logo} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <Tv className="w-6 h-6 text-gray-400" />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-bold truncate">{channel.name}</h3>
