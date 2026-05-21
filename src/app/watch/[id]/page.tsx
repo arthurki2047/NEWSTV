@@ -17,9 +17,11 @@ export default function PlayerPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Fetch channels from Firestore or fallback to static
-  const channelsRef = db ? collection(db, "channels") : null;
-  const channelsQuery = useMemo(() => channelsRef ? query(channelsRef) : null, [channelsRef]);
+  const channelsQuery = useMemo(() => {
+    if (!db) return null;
+    return query(collection(db, "channels"));
+  }, [db]);
+
   const { data: dbChannels } = useCollection(channelsQuery);
 
   const allChannels = dbChannels && dbChannels.length > 0 ? dbChannels : staticChannelData.channels;
@@ -51,9 +53,7 @@ export default function PlayerPage() {
         hls.loadSource(channel.stream_url);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          videoRef.current?.play().catch(() => {
-            console.log("Autoplay prevented");
-          });
+          videoRef.current?.play().catch(() => {});
         });
         return () => hls.destroy();
       } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {

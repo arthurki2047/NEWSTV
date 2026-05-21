@@ -16,9 +16,11 @@ export default function Home() {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [activeChannelIndex, setActiveChannelIndex] = useState(0);
 
-  // Use Firestore collection if available, fallback to static JSON
-  const channelsRef = db ? collection(db, "channels") : null;
-  const channelsQuery = useMemo(() => channelsRef ? query(channelsRef, orderBy("category")) : null, [channelsRef]);
+  const channelsQuery = useMemo(() => {
+    if (!db) return null;
+    return query(collection(db, "channels"), orderBy("category"));
+  }, [db]);
+
   const { data: dbChannels } = useCollection(channelsQuery);
 
   const categories = staticChannelData.categories;

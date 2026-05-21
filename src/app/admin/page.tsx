@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useCollection, useFirestore } from "@/firebase";
 import { collection, addDoc, updateDoc, deleteDoc, doc, query, orderBy } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,12 @@ import channelData from "@/lib/channels.json";
 
 export default function AdminPanel() {
   const db = useFirestore();
-  const channelsRef = db ? collection(db, "channels") : null;
-  const channelsQuery = channelsRef ? query(channelsRef, orderBy("category")) : null;
+  
+  const channelsQuery = useMemo(() => {
+    if (!db) return null;
+    return query(collection(db, "channels"), orderBy("category"));
+  }, [db]);
+
   const { data: channels, loading } = useCollection(channelsQuery);
 
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -29,16 +33,18 @@ export default function AdminPanel() {
 
   const categories = ["Bengali News", "Hindi News", "English News"];
 
-  const handleSeedData = async () => {
-    if (!channelsRef) return;
-    for (const channel of channelData.channels) {
+  const handleSeedData = () => {
+    if (!db) return;
+    const channelsRef = collection(db, "channels");
+    channelData.channels.forEach((channel) => {
       addDoc(channelsRef, channel);
-    }
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!channelsRef) return;
+    if (!db) return;
+    const channelsRef = collection(db, "channels");
 
     if (editingId) {
       updateDoc(doc(channelsRef, editingId), formData);
@@ -61,8 +67,9 @@ export default function AdminPanel() {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm("Delete this channel?") && channelsRef) {
-      deleteDoc(doc(channelsRef, id));
+    if (!db) return;
+    if (confirm("Delete this channel?")) {
+      deleteDoc(doc(db, "channels", id));
     }
   };
 
