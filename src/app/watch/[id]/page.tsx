@@ -1,18 +1,29 @@
+
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useRouter, useParams } from "next/navigation";
-import channelData from "@/lib/channels.json";
+import staticChannelData from "@/lib/channels.json";
 import { ArrowLeft, Maximize, Info } from "lucide-react";
 import Hls from "hls.js";
+import { useCollection, useFirestore } from "@/firebase";
+import { collection, query } from "firebase/firestore";
 
 export default function PlayerPage() {
   const router = useRouter();
   const params = useParams();
+  const db = useFirestore();
   const channelId = params.id as string;
-  const channel = channelData.channels.find((c) => c.id === channelId);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Fetch channels from Firestore or fallback to static
+  const channelsRef = db ? collection(db, "channels") : null;
+  const channelsQuery = useMemo(() => channelsRef ? query(channelsRef) : null, [channelsRef]);
+  const { data: dbChannels } = useCollection(channelsQuery);
+
+  const allChannels = dbChannels && dbChannels.length > 0 ? dbChannels : staticChannelData.channels;
+  const channel = allChannels.find((c: any) => (c.id === channelId || c.__id === channelId));
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -41,7 +52,7 @@ export default function PlayerPage() {
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           videoRef.current?.play().catch(() => {
-            console.log("Autoplay prevented, user interaction required");
+            console.log("Autoplay prevented");
           });
         });
         return () => hls.destroy();
@@ -74,7 +85,6 @@ export default function PlayerPage() {
 
   return (
     <div className="kaios-viewport flex flex-col bg-black overflow-hidden relative">
-      {/* Player Header - Only show when not fullscreen */}
       {!isFullscreen && (
         <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 to-transparent p-2 flex items-center gap-2">
           <ArrowLeft 
@@ -89,7 +99,6 @@ export default function PlayerPage() {
         </div>
       )}
 
-      {/* Video Container */}
       <div className={`relative flex-1 bg-black flex items-center justify-center ${isFullscreen ? 'z-50' : ''}`}>
         {isHls ? (
           <video
@@ -110,7 +119,6 @@ export default function PlayerPage() {
         )}
       </div>
 
-      {/* Control Bar - Only show when not fullscreen */}
       {!isFullscreen && (
         <div className="bg-primary text-primary-foreground p-1 flex justify-between items-center text-[9px] font-bold">
           <div className="flex items-center gap-1">
@@ -130,7 +138,6 @@ export default function PlayerPage() {
         </div>
       )}
 
-      {/* Toast-style indicator for Fullscreen */}
       {isFullscreen && (
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[8px] px-2 py-0.5 rounded-full z-[60]">
           Press OK to exit Fullscreen

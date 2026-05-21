@@ -1,0 +1,28 @@
+
+{
+  "entities": {
+    "Channel": {
+      "title": "Channel",
+      "description": "A news TV channel",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "logo": { "type": "string" },
+        "stream_url": { "type": "string" },
+        "youtube_id": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["name", "category"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "/channels/{channelId}": {
+      "schema": { "$ref": "#/entities/Channel" },
+      "description": "The collection of TV channels"
+    }
+  }
+}

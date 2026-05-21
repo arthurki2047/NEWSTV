@@ -1,10 +1,11 @@
+
 {
   "channels": [
     {
       "id": "republic-bangla",
       "name": "Republic Bangla",
       "logo": "https://picsum.photos/seed/republicbangla/64/64",
-      "stream_url": "https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-366023/main.m3u8?ads.partner=republicweb",
+      "stream_url": "https://vg-republictvlive.akamaized.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/vglive-sk-456368/main.m3u8",
       "category": "Bengali News"
     },
     {
@@ -39,7 +40,7 @@
       "id": "cn-news",
       "name": "CN News",
       "logo": "https://picsum.photos/seed/cnnews/64/64",
-      "youtube_id": "xDKphR5F1ro",
+      "stream_url": "https://d1msejlow1t3l4.cloudfront.net/fta/calcuttanews/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b",
       "category": "Bengali News"
     },
     {
@@ -53,7 +54,7 @@
       "id": "republic-bharat",
       "name": "Republic Bharat",
       "logo": "https://picsum.photos/seed/republicbharat/64/64",
-      "youtube_id": "BDyKqpqsT2c",
+      "stream_url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/7e8b490d6b9c4013a3e3e874aa352212/index.m3u8",
       "category": "Hindi News"
     },
     {
@@ -74,7 +75,7 @@
       "id": "ndtv-24x7",
       "name": "NDTV 24*7",
       "logo": "https://picsum.photos/seed/ndtv247/64/64",
-      "youtube_id": "CkvRppu0NeA",
+      "stream_url": "https://ndtv24x7elemarchana.akamaized.net/hls/live/2003678-b/ndtv24x7/master.m3u8",
       "category": "English News"
     },
     {
@@ -88,7 +89,7 @@
       "id": "india-today",
       "name": "India Today",
       "logo": "https://picsum.photos/seed/indiatoday/64/64",
-      "youtube_id": "Uun8mxFUXrU",
+      "stream_url": "https://indiatodaylive.akamaized.net/hls/live/2014320/indiatoday/indiatodaylive/playlist.m3u8",
       "category": "English News"
     }
   ],

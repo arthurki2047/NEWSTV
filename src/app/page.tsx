@@ -1,25 +1,36 @@
 
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import channelData from "@/lib/channels.json";
+import staticChannelData from "@/lib/channels.json";
 import { cn } from "@/lib/utils";
-import { Tv, ChevronRight, ChevronLeft, LayoutGrid } from "lucide-react";
+import { Tv, ChevronRight, ChevronLeft, LayoutGrid, Settings } from "lucide-react";
+import { useCollection, useFirestore } from "@/firebase";
+import { collection, query, orderBy } from "firebase/firestore";
 
 export default function Home() {
   const router = useRouter();
+  const db = useFirestore();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [activeChannelIndex, setActiveChannelIndex] = useState(0);
-  const listRef = useRef<HTMLDivElement>(null);
 
-  const categories = channelData.categories;
+  // Use Firestore collection if available, fallback to static JSON
+  const channelsRef = db ? collection(db, "channels") : null;
+  const channelsQuery = useMemo(() => channelsRef ? query(channelsRef, orderBy("category")) : null, [channelsRef]);
+  const { data: dbChannels } = useCollection(channelsQuery);
+
+  const categories = staticChannelData.categories;
   const currentCategory = categories[activeCategoryIndex];
   
-  const filteredChannels = channelData.channels.filter(c => 
-    currentCategory === "All" || c.category === currentCategory
-  );
+  const allChannels = dbChannels && dbChannels.length > 0 ? dbChannels : staticChannelData.channels;
+
+  const filteredChannels = useMemo(() => {
+    return allChannels.filter(c => 
+      currentCategory === "All" || c.category === currentCategory
+    );
+  }, [allChannels, currentCategory]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -44,8 +55,9 @@ export default function Home() {
           break;
         case "Enter":
         case "SoftCenter":
-          if (filteredChannels[activeChannelIndex]) {
-            router.push(`/watch/${filteredChannels[activeChannelIndex].id}`);
+          const activeChannel = filteredChannels[activeChannelIndex];
+          if (activeChannel) {
+            router.push(`/watch/${activeChannel.id || activeChannel.__id}`);
           }
           break;
       }
@@ -70,9 +82,12 @@ export default function Home() {
           <Tv className="w-4 h-4" />
           <h1 className="text-xs font-bold tracking-tight">NewsTV</h1>
         </div>
-        <div className="text-[10px] bg-accent px-1 rounded font-bold animate-pulse">
-          LIVE
-        </div>
+        <button 
+          onClick={() => router.push('/admin')}
+          className="p-1 hover:bg-white/20 rounded-full"
+        >
+          <Settings className="w-3 h-3" />
+        </button>
       </div>
 
       {/* Category Tabs */}
@@ -87,15 +102,12 @@ export default function Home() {
       </div>
 
       {/* Channel List */}
-      <div 
-        ref={listRef}
-        className="flex-1 overflow-y-auto bg-background p-1 space-y-1"
-      >
+      <div className="flex-1 overflow-y-auto bg-background p-1 space-y-1">
         {filteredChannels.map((channel, idx) => (
           <div
-            key={channel.id}
+            key={channel.id || channel.__id}
             id={`channel-${idx}`}
-            onClick={() => router.push(`/watch/${channel.id}`)}
+            onClick={() => router.push(`/watch/${channel.id || channel.__id}`)}
             className={cn(
               "flex items-center gap-2 p-2 rounded border border-transparent transition-all duration-150 cursor-pointer",
               idx === activeChannelIndex 
