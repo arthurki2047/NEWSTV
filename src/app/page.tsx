@@ -1,14 +1,13 @@
+'use client';
 
-"use client";
-
-import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import staticChannelData from "@/lib/channels.json";
-import { cn } from "@/lib/utils";
-import { Tv, ChevronRight, ChevronLeft, LayoutGrid, Settings } from "lucide-react";
-import { useCollection, useFirestore } from "@/firebase";
-import { collection, query, orderBy } from "firebase/firestore";
+import { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import staticChannelData from '@/lib/channels.json';
+import { cn } from '@/lib/utils';
+import { Tv, ChevronRight, ChevronLeft, LayoutGrid, Settings } from 'lucide-react';
+import { useCollection, useFirestore } from '@/firebase';
+import { collection, query, orderBy } from 'firebase/firestore';
 
 export default function Home() {
   const router = useRouter();
@@ -18,7 +17,7 @@ export default function Home() {
 
   const channelsQuery = useMemo(() => {
     if (!db) return null;
-    return query(collection(db, "channels"), orderBy("category"));
+    return query(collection(db, 'channels'), orderBy('category'));
   }, [db]);
 
   const { data: dbChannels } = useCollection(channelsQuery);
@@ -26,37 +25,39 @@ export default function Home() {
   const categories = staticChannelData.categories;
   const currentCategory = categories[activeCategoryIndex];
   
-  const allChannels = dbChannels && dbChannels.length > 0 ? dbChannels : staticChannelData.channels;
+  const allChannels = useMemo(() => {
+    return dbChannels && dbChannels.length > 0 ? dbChannels : staticChannelData.channels;
+  }, [dbChannels]);
 
   const filteredChannels = useMemo(() => {
     return allChannels.filter(c => 
-      currentCategory === "All" || c.category === currentCategory
+      currentCategory === 'All' || c.category === currentCategory
     );
   }, [allChannels, currentCategory]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
           setActiveChannelIndex(prev => Math.max(0, prev - 1));
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           e.preventDefault();
           setActiveChannelIndex(prev => Math.min(filteredChannels.length - 1, prev + 1));
           break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
           e.preventDefault();
           setActiveCategoryIndex(prev => (prev > 0 ? prev - 1 : categories.length - 1));
           setActiveChannelIndex(0);
           break;
-        case "ArrowRight":
+        case 'ArrowRight':
           e.preventDefault();
           setActiveCategoryIndex(prev => (prev < categories.length - 1 ? prev + 1 : 0));
           setActiveChannelIndex(0);
           break;
-        case "Enter":
-        case "SoftCenter":
+        case 'Enter':
+        case 'SoftCenter':
           const activeChannel = filteredChannels[activeChannelIndex];
           if (activeChannel) {
             router.push(`/watch/${activeChannel.id || activeChannel.__id}`);
@@ -65,14 +66,14 @@ export default function Home() {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeChannelIndex, activeCategoryIndex, filteredChannels, categories.length, router]);
 
   useEffect(() => {
     const activeElement = document.getElementById(`channel-${activeChannelIndex}`);
     if (activeElement) {
-      activeElement.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      activeElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
   }, [activeChannelIndex]);
 
@@ -95,7 +96,7 @@ export default function Home() {
       {/* Category Tabs */}
       <div className="bg-secondary flex items-center justify-between px-1 py-1 border-b">
         <ChevronLeft className="w-3 h-3 text-primary shrink-0 opacity-50" />
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-center px-1">
           <span className="text-[10px] font-bold text-primary uppercase tracking-wider truncate">
             {currentCategory}
           </span>
@@ -111,10 +112,10 @@ export default function Home() {
             id={`channel-${idx}`}
             onClick={() => router.push(`/watch/${channel.id || channel.__id}`)}
             className={cn(
-              "flex items-center gap-2 p-2 rounded border border-transparent transition-all duration-150 cursor-pointer",
+              'flex items-center gap-2 p-2 rounded border border-transparent transition-all duration-150 cursor-pointer',
               idx === activeChannelIndex 
-                ? "bg-primary text-white shadow-md scale-[1.02] translate-x-1" 
-                : "bg-white text-foreground shadow-sm hover:bg-gray-50"
+                ? 'bg-primary text-white shadow-md scale-[1.02] translate-x-1' 
+                : 'bg-white text-foreground shadow-sm hover:bg-gray-50'
             )}
           >
             <div className="relative w-8 h-8 shrink-0 bg-gray-100 rounded-sm overflow-hidden border flex items-center justify-center">
@@ -135,8 +136,8 @@ export default function Home() {
                 {channel.name}
               </div>
               <div className={cn(
-                "text-[9px] truncate",
-                idx === activeChannelIndex ? "text-primary-foreground/80" : "text-muted-foreground"
+                'text-[9px] truncate',
+                idx === activeChannelIndex ? 'text-primary-foreground/80' : 'text-muted-foreground'
               )}>
                 {channel.category}
               </div>
